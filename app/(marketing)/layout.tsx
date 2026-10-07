@@ -15,18 +15,15 @@ export default async function MarketingLayout({
 }: MarketingLayoutProps) {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="container z-40 bg-background">
-        <div className="flex h-20 items-center justify-between py-6">
+      <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between">
           <MainNav items={marketingConfig.mainNav} />
           <nav>
             <Link
-              href="/login"
-              className={cn(
-                buttonVariants({ variant: "secondary", size: "sm" }),
-                "px-4"
-              )}
+              href="/#contact"
+              className={cn(buttonVariants({ size: "sm" }), "px-4")}
             >
-              Login
+              Start a project
             </Link>
           </nav>
         </div>
