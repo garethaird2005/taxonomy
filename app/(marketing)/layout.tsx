@@ -1,38 +1,21 @@
-import Link from "next/link"
-
 import { marketingConfig } from "@/config/marketing"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import { MainNav } from "@/components/main-nav"
-import { SiteFooter } from "@/components/site-footer"
+import { Backdrop } from "@/components/landing/backdrop"
+import { Footer } from "@/components/landing/footer"
+import { ScrollEffects } from "@/components/landing/scroll-effects"
+import { SiteHeader } from "@/components/landing/site-header"
 
 interface MarketingLayoutProps {
   children: React.ReactNode
 }
 
-export default async function MarketingLayout({
-  children,
-}: MarketingLayoutProps) {
+export default function MarketingLayout({ children }: MarketingLayoutProps) {
   return (
-    <div className="flex min-h-screen flex-col">
-      <header className="container z-40 bg-background">
-        <div className="flex h-20 items-center justify-between py-6">
-          <MainNav items={marketingConfig.mainNav} />
-          <nav>
-            <Link
-              href="/login"
-              className={cn(
-                buttonVariants({ variant: "secondary", size: "sm" }),
-                "px-4"
-              )}
-            >
-              Login
-            </Link>
-          </nav>
-        </div>
-      </header>
+    <div className="relative flex min-h-screen flex-col overflow-x-clip">
+      <Backdrop />
+      <SiteHeader items={marketingConfig.mainNav} />
       <main className="flex-1">{children}</main>
-      <SiteFooter />
+      <Footer />
+      <ScrollEffects />
     </div>
   )
 }

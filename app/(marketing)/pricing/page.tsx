@@ -1,8 +1,8 @@
-import Link from "next/link"
-
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import { Icons } from "@/components/icons"
+import { Contact } from "@/components/landing/contact"
+import { Faq } from "@/components/landing/faq"
+import { Pricing } from "@/components/landing/pricing"
+import { Eyebrow } from "@/components/landing/section-header"
+import { Sheet } from "@/components/landing/sheet"
 
 export const metadata = {
   title: "Pricing",
@@ -10,60 +10,25 @@ export const metadata = {
 
 export default function PricingPage() {
   return (
-    <section className="container flex flex-col  gap-6 py-8 md:max-w-[64rem] md:py-12 lg:py-24">
-      <div className="mx-auto flex w-full flex-col gap-4 md:max-w-[58rem]">
-        <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-          Simple, transparent pricing
-        </h2>
-        <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-          Unlock all features including unlimited posts for your blog.
-        </p>
-      </div>
-      <div className="grid w-full items-start gap-10 rounded-lg border p-10 md:grid-cols-[1fr_200px]">
-        <div className="grid gap-6">
-          <h3 className="text-xl font-bold sm:text-2xl">
-            What&apos;s included in the PRO plan
-          </h3>
-          <ul className="grid gap-3 text-sm text-muted-foreground sm:grid-cols-2">
-            <li className="flex items-center">
-              <Icons.check className="mr-2 h-4 w-4" /> Unlimited Posts
-            </li>
-            <li className="flex items-center">
-              <Icons.check className="mr-2 h-4 w-4" /> Unlimited Users
-            </li>
-
-            <li className="flex items-center">
-              <Icons.check className="mr-2 h-4 w-4" /> Custom domain
-            </li>
-            <li className="flex items-center">
-              <Icons.check className="mr-2 h-4 w-4" /> Dashboard Analytics
-            </li>
-            <li className="flex items-center">
-              <Icons.check className="mr-2 h-4 w-4" /> Access to Discord
-            </li>
-            <li className="flex items-center">
-              <Icons.check className="mr-2 h-4 w-4" /> Premium Support
-            </li>
-          </ul>
-        </div>
-        <div className="flex flex-col gap-4 text-center">
-          <div>
-            <h4 className="text-7xl font-bold">$19</h4>
-            <p className="text-sm font-medium text-muted-foreground">
-              Billed Monthly
-            </p>
-          </div>
-          <Link href="/login" className={cn(buttonVariants({ size: "lg" }))}>
-            Get Started
-          </Link>
-        </div>
-      </div>
-      <div className="mx-auto flex w-full max-w-[58rem] flex-col gap-4">
-        <p className="max-w-[85%] leading-normal text-muted-foreground sm:leading-7">
-          Taxonomy is a demo app.{" "}
-          <strong>You can test the upgrade and won&apos;t be charged.</strong>
-        </p>
-      </div>
-    </section>
+    <>
+      <section
+        data-surface="night"
+        className="container pb-20 pt-40 text-paper md:pb-28 md:pt-48"
+      >
+        <Eyebrow data-load className="text-sky/70">
+          Pricing
+        </Eyebrow>
+        <h1 className="mt-6 max-w-[14ch] font-heading text-[clamp(2.85rem,6.4vw,6rem)] font-light leading-[0.98] tracking-[-0.045em]">
+          <span data-load="mask">
+            <span>Clear prices for work that lasts.</span>
+          </span>
+        </h1>
+      </section>
+      <Sheet>
+        <Pricing />
+        <Faq />
+      </Sheet>
+      <Contact />
+    </>
   )
 }

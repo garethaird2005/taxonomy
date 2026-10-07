@@ -1,13 +1,17 @@
 import { SiteConfig } from "types"
 
+// PLACEHOLDER: replace description, url, email and links with the real
+// business details before launch. Everything on the landing page reads from
+// here and from config/landing.ts.
 export const siteConfig: SiteConfig = {
-  name: "Taxonomy",
+  name: "Polaris Works",
   description:
-    "An open source application built using the new router, server components and everything new in Next.js 13.",
-  url: "https://tx.shadcn.com",
-  ogImage: "https://tx.shadcn.com/og.jpg",
+    "Dashboards, workflow automations and high-end websites for teams that want to move faster and see clearly.",
+  url: "https://example.com",
+  ogImage: "https://example.com/og.jpg",
+  email: "hello@example.com",
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn/taxonomy",
+    twitter: "https://twitter.com/",
+    github: "https://github.com/garethaird2005",
   },
 }
