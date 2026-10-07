@@ -20,10 +20,7 @@ const categoryStyles: Record<
 
 export function Showcase() {
   return (
-    <section
-      id="work"
-      className="scroll-mt-20 border-y bg-slate-50/60 py-16 dark:bg-transparent md:py-24"
-    >
+    <section id="work" className="scroll-mt-20 border-y py-16 md:py-24">
       <div className="container">
         <SectionHeader
           eyebrow="Selected work"
@@ -37,7 +34,7 @@ export function Showcase() {
             return (
               <article
                 key={study.title}
-                className="flex flex-col overflow-hidden rounded-2xl border bg-background"
+                className="flex flex-col overflow-hidden rounded-2xl border bg-background/60 backdrop-blur-sm"
               >
                 <div
                   className={`relative flex h-40 items-center justify-center bg-gradient-to-br ${gradient}`}

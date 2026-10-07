@@ -44,10 +44,7 @@ export const metadata = {
     },
   ],
   creator: siteConfig.name,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
+  themeColor: "#030711",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -81,7 +78,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontHeading.variable
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <ThemeProvider attribute="class" forcedTheme="dark">
           {children}
           <Analytics />
           <Toaster />

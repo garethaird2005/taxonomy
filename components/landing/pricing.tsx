@@ -8,10 +8,7 @@ import { SectionHeader } from "@/components/landing/section-header"
 
 export function Pricing() {
   return (
-    <section
-      id="pricing"
-      className="scroll-mt-20 border-y bg-slate-50/60 py-16 dark:bg-transparent md:py-24"
-    >
+    <section id="pricing" className="scroll-mt-20 border-y py-16 md:py-24">
       <div className="container">
         <SectionHeader
           eyebrow="Pricing"
@@ -23,7 +20,7 @@ export function Pricing() {
             <div
               key={plan.name}
               className={cn(
-                "relative flex flex-col rounded-2xl border bg-background p-8",
+                "relative flex flex-col rounded-2xl border bg-background/60 p-8 backdrop-blur-sm",
                 plan.featured &&
                   "border-indigo-500 shadow-xl shadow-indigo-500/10 md:-mt-4 md:pb-12"
               )}

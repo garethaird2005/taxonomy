@@ -9,7 +9,6 @@ import { DashboardPreview } from "@/components/landing/dashboard-preview"
 export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
-      <div className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_70%)]" />
       <div className="container grid items-center gap-12 pb-16 pt-12 md:pb-24 md:pt-20 lg:grid-cols-[1.1fr_1fr]">
         <div className="flex flex-col items-start gap-6">
           <span className="inline-flex items-center gap-2 rounded-full border bg-background/60 px-3 py-1 text-sm text-muted-foreground backdrop-blur">

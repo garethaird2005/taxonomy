@@ -72,7 +72,7 @@ export function ContactForm() {
     return (
       <div
         role="status"
-        className="flex flex-col items-center gap-3 rounded-2xl border bg-background p-10 text-center"
+        className="flex flex-col items-center gap-3 rounded-2xl border bg-background/60 p-10 text-center backdrop-blur-sm"
       >
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
           <Icons.check className="h-6 w-6" aria-hidden="true" />
@@ -89,7 +89,7 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit(onSubmit)}
       noValidate
-      className="grid gap-5 rounded-2xl border bg-background p-6 sm:p-8"
+      className="grid gap-5 rounded-2xl border bg-background/60 p-6 backdrop-blur-sm sm:p-8"
     >
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="grid gap-2">

@@ -14,7 +14,7 @@ export function Services() {
         {services.map((service) => (
           <article
             key={service.id}
-            className="group relative flex flex-col rounded-2xl border bg-background p-8 transition-shadow hover:shadow-xl hover:shadow-indigo-500/5"
+            className="group relative flex flex-col rounded-2xl border bg-background/60 p-8 backdrop-blur-sm transition-shadow hover:shadow-xl hover:shadow-indigo-500/5"
           >
             <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 text-white">
               <service.icon className="h-6 w-6" aria-hidden="true" />
