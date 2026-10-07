@@ -10,7 +10,7 @@ export function Pricing() {
   return (
     <section
       id="pricing"
-      className="scroll-mt-20 border-y bg-slate-50 py-16 dark:bg-transparent md:py-24"
+      className="scroll-mt-20 border-y bg-slate-50/60 py-16 dark:bg-transparent md:py-24"
     >
       <div className="container">
         <SectionHeader
