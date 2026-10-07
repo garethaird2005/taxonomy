@@ -96,38 +96,70 @@ function createSky(width: number, height: number): Sky {
     placed++
   }
 
-  // The unresolved glow of the galaxy, with darker dust lanes along its
-  // spine, painted once at low resolution and stretched over the sky.
-  const size = 640
+  // The unresolved glow of the galaxy, painted once and stretched over the
+  // sky. Every blob is an ellipse drawn long along the band, so the glow
+  // reads as one continuous stream and the dust lanes as thin filaments
+  // rather than round holes.
+  const size = 1024
   const scale = size / (radius * 2)
   const haze = document.createElement("canvas")
   haze.width = haze.height = size
   const ctx = haze.getContext("2d")
   if (ctx) {
-    const blob = (x: number, y: number, r: number, color: string) => {
-      const cx = (x + radius) * scale
-      const cy = (y + radius) * scale
+    const streak = (
+      x: number,
+      y: number,
+      r: number,
+      stretch: number,
+      color: string
+    ) => {
       const cr = Math.max(r * scale, 1)
-      const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, cr)
+      ctx.save()
+      ctx.translate((x + radius) * scale, (y + radius) * scale)
+      ctx.rotate(BAND_ANGLE)
+      ctx.scale(stretch, 1)
+      const g = ctx.createRadialGradient(0, 0, 0, 0, 0, cr)
       g.addColorStop(0, color)
       g.addColorStop(1, "rgb(0 0 0 / 0)")
       ctx.fillStyle = g
-      ctx.fillRect(cx - cr, cy - cr, cr * 2, cr * 2)
+      ctx.fillRect(-cr, -cr, cr * 2, cr * 2)
+      ctx.restore()
     }
-    for (let i = 0; i < 1200; i++) {
+    // A smooth base layer so there are never gaps in the band.
+    for (let along = -radius * 1.4; along < radius * 1.4; along += 20) {
+      const w = widthAt(along)
+      const p = bandPoint(along, 0)
+      streak(p.x, p.y, w * 1.3, 2, "rgb(214 220 232 / 0.035)")
+    }
+    // Brighter, warmer clumps of starlight, concentrated towards the core.
+    for (let i = 0; i < 2600; i++) {
       const along = (rand() * 2 - 1) * radius * 1.4
       const w = widthAt(along)
-      const p = bandPoint(along, gaussian(rand) * w * 0.7)
+      const p = bandPoint(along, gaussian(rand) * w * 0.55)
       const nearCore = Math.exp(-((along / taper) ** 2))
-      const tone = rand() < nearCore ? "255 232 204" : "220 228 240"
-      blob(p.x, p.y, w * (0.6 + rand() * 0.8), `rgb(${tone} / 0.065)`)
+      const tone = rand() < nearCore ? "255 234 208" : "222 228 240"
+      streak(
+        p.x,
+        p.y,
+        w * (0.35 + rand() * 0.5),
+        2 + rand() * 3,
+        `rgb(${tone} / 0.035)`
+      )
     }
+    // Dark dust filaments winding along the spine.
     ctx.globalCompositeOperation = "destination-out"
-    for (let i = 0; i < 260; i++) {
+    for (let i = 0; i < 700; i++) {
       const along = (rand() * 2 - 1) * radius * 1.2
       const w = widthAt(along)
-      const p = bandPoint(along, w * (0.1 + gaussian(rand) * 0.18))
-      blob(p.x, p.y, w * (0.15 + rand() * 0.3), "rgb(0 0 0 / 0.35)")
+      const drift = Math.sin(along / (w * 6)) * w * 0.25
+      const p = bandPoint(along, drift + gaussian(rand) * w * 0.12)
+      streak(
+        p.x,
+        p.y,
+        w * (0.06 + rand() * 0.1),
+        4 + rand() * 6,
+        "rgb(0 0 0 / 0.12)"
+      )
     }
   }
 
