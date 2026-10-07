@@ -2,71 +2,90 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Palette: deep night blues for the backdrop, warm paper for content sheets,
+  cobalt and sky as the only accents. `.theme-paper` and `.theme-night` scope
+  either palette to part of a page, so shared components adapt on their own.
+*/
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 47.4% 11.2%;
+  :root,
+  .theme-paper {
+    --background: 40 17% 93%;
+    --foreground: 218 55% 10%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 40 14% 88%;
+    --muted-foreground: 218 11% 39%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 47.4% 11.2%;
+    --popover-foreground: 218 55% 10%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 36 9% 82%;
+    --input: 36 9% 76%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 47.4% 11.2%;
+    --card: 40 33% 97%;
+    --card-foreground: 218 55% 10%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 218 55% 10%;
+    --primary-foreground: 40 23% 96%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 40 14% 88%;
+    --secondary-foreground: 218 55% 10%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 40 14% 88%;
+    --accent-foreground: 218 55% 10%;
 
-    --destructive: 0 100% 50%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 46%;
+    --destructive-foreground: 0 0% 100%;
 
-    --ring: 215 20.2% 65.1%;
+    --ring: 228 68% 50%;
+    --highlight: 228 68% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
 
-  .dark {
-    --background: 224 71% 4%;
-    --foreground: 213 31% 91%;
+  .dark,
+  .theme-night {
+    --background: 218 63% 6%;
+    --foreground: 40 23% 95%;
 
-    --muted: 223 47% 11%;
-    --muted-foreground: 215.4 16.3% 56.9%;
+    --muted: 218 45% 12%;
+    --muted-foreground: 220 20% 70%;
 
-    --accent: 216 34% 17%;
-    --accent-foreground: 210 40% 98%;
+    --popover: 218 60% 8%;
+    --popover-foreground: 40 23% 95%;
 
-    --popover: 224 71% 4%;
-    --popover-foreground: 215 20.2% 65.1%;
+    --border: 218 32% 19%;
+    --input: 218 32% 24%;
 
-    --border: 216 34% 17%;
-    --input: 216 34% 17%;
+    --card: 218 55% 9%;
+    --card-foreground: 40 23% 95%;
 
-    --card: 224 71% 4%;
-    --card-foreground: 213 31% 91%;
+    --primary: 40 23% 96%;
+    --primary-foreground: 218 63% 8%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 1.2%;
+    --secondary: 218 40% 14%;
+    --secondary-foreground: 40 23% 95%;
 
-    --secondary: 222.2 47.4% 11.2%;
-    --secondary-foreground: 210 40% 98%;
+    --accent: 220 40% 16%;
+    --accent-foreground: 40 23% 95%;
 
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 63% 45%;
+    --destructive-foreground: 0 0% 100%;
 
-    --ring: 216 34% 17%;
+    --ring: 224 90% 78%;
+    --highlight: 224 90% 78%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+  }
+
+  .theme-paper,
+  .theme-night {
+    color: hsl(var(--foreground));
+  }
+
+  :root {
+    /* One easing curve for every transition on the site. */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
 
@@ -81,13 +100,150 @@
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 bg-clip-text text-transparent;
+  /* Fine film grain over the night backdrop. */
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
+  .pixelated {
+    image-rendering: pixelated;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Fades content out at both horizontal edges, for the marquee. */
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
   }
 }
 
+/*
+  Motion. Every entrance on the site uses the same rise: 28px, one curve
+  (--ease-out), 90ms between siblings via `--i`. Headlines slide up from
+  behind a clipping edge instead ("mask").
+
+  `data-load` plays as soon as the page paints, for content above the fold.
+  `data-reveal` waits until the element scrolls into view.
+*/
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+  }
+}
+
+@keyframes mask-rise {
+  from {
+    transform: translate3d(0, 108%, 0);
+  }
+}
+
+@keyframes reveal-fallback {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+[data-load="mask"],
+[data-reveal="mask"] {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+
+[data-load="mask"] > *,
+[data-reveal="mask"] > * {
+  display: block;
+}
+
+[data-load] {
+  animation: rise 1100ms var(--ease-out) both;
+  animation-delay: calc(200ms + var(--i, 0) * 90ms);
+}
+
+[data-load="mask"] {
+  animation: none;
+}
+
+[data-load="mask"] > * {
+  animation: mask-rise 1200ms var(--ease-out) both;
+  animation-delay: calc(120ms + var(--i, 0) * 110ms);
+}
+
+@media (scripting: enabled) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+    transition: opacity 900ms var(--ease-out), transform 1100ms var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 90ms);
+  }
+
+  [data-reveal="mask"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  [data-reveal="mask"] > * {
+    transform: translate3d(0, 108%, 0);
+    transition: transform 1200ms var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 110ms);
+  }
+
+  [data-reveal][data-revealed],
+  [data-reveal="mask"][data-revealed] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* If the script never runs, show everything after a moment anyway. */
+  html:not([data-reveal-ready]) [data-reveal],
+  html:not([data-reveal-ready]) [data-reveal="mask"] > * {
+    animation: reveal-fallback 1ms 3s forwards;
+  }
+}
+
+/* Paper sheets settle to full width as they rise over the backdrop. */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+
+  [data-sheet] {
+    transform: scale(calc(0.96 + 0.04 * var(--enter, 1)));
+    transform-origin: 50% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-load],
+  [data-load="mask"] > *,
+  [data-reveal],
+  [data-reveal="mask"] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  [data-backdrop] [data-depth] {
+    transform: none !important;
   }
 }

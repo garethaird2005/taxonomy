@@ -1,5 +1,8 @@
-import { Inter as FontSans } from "next/font/google"
-import localFont from "next/font/local"
+import {
+  Inter_Tight as FontHeading,
+  IBM_Plex_Mono as FontMono,
+  Inter as FontSans,
+} from "next/font/google"
 
 import "@/styles/globals.css"
 import { siteConfig } from "@/config/site"
@@ -14,10 +17,16 @@ const fontSans = FontSans({
   variable: "--font-sans",
 })
 
-// Font files can be colocated inside of `pages`
-const fontHeading = localFont({
-  src: "../assets/fonts/CalSans-SemiBold.woff2",
+const fontHeading = FontHeading({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
   variable: "--font-heading",
+})
+
+const fontMono = FontMono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono",
 })
 
 interface RootLayoutProps {
@@ -44,7 +53,7 @@ export const metadata = {
     },
   ],
   creator: siteConfig.name,
-  themeColor: "#030711",
+  themeColor: "#050B16",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -75,7 +84,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable,
-          fontHeading.variable
+          fontHeading.variable,
+          fontMono.variable
         )}
       >
         <ThemeProvider attribute="class" forcedTheme="dark">
